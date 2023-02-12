@@ -1,0 +1,45 @@
+<view class="bottomMenu">
+  <!-- 滚动区域 -->
+  <view class="scroll-container">
+    <view class="transform-container" animation="{{animationData}}">
+      <view wx:for="{{todatEatList}}" wx:key="*this" class="scroll-text">
+        {{item.address}} {{item.name}}
+      </view>
+    </view>
+  </view>
+  <view class="choseMenu">
+    <view class="choseEat" bindtap="randomOrder">选菜</view>
+    <view class="select_all_checkbox">
+      <checkbox bindtap="selectAll" checked="{{select_all}}">全选</checkbox>
+      <checkbox bindtap="selectFriCanteen" checked="{{select_Fir}}">一食堂</checkbox>
+      <checkbox bindtap="selectSecCanteen" checked="{{select_Sec}}">二食堂</checkbox>
+      <checkbox bindtap="selectThirdCanteen" checked="{{select_Third}}">三食堂</checkbox>
+    </view>
+  </view>
+</view>
+
+<view class="hotlist">
+
+
+  <view wx:for="{{hotlist}}" wx:key="id">
+    <view class="hotlist_item">
+      <view class="hotlist_name">{{item.name}}</view>
+      <view class="hotlist_address">{{item.address}}</view>
+      <view class="hotlist_hot" wx:if="{{item.hot<1000}}">{{item.hot}}</view>
+      <view class="hotlist_hot" wx:if="{{item.hot>=1000&&item.hot<1000000}}">{{(item.hot-(item.hot%1000))/1000}}k</view>
+      <view class="hotlist_hot" wx:if="{{item.hot>1000000}}">999k+</view>
+
+      <checkbox checked="{{item.checked}}" bindtap="seltectOne" data-id="{{item.id}}"></checkbox>
+      <image wx:if="{{item.islike==1}}" src="{{like_image}}" class="like_image" mode="aspectFill" bindtap="postLike" data-eid="{{item.eid}}" data-mytype="{{0}}" data-id="{{item.id}}"></image>
+      <image wx:if="{{item.islike==0}}" src="{{not_like_image}}" class="like_image" mode="aspectFill" bindtap="postLike" data-eid="{{item.eid}}" data-mytype="{{1}}" data-id="{{item.id}}"></image>
+    </view>
+  </view>
+</view>
+
+<view class="hotlist_title" style="background-color: rgb(53, 160, 160);margin: 0;padding: 0;">
+  <view class="hotlist_name" style="background-color:azure;">菜品</view>
+  <view class="hotlist_address" style="background-color:azure;">食堂</view>
+  <view class="hotlist_hot" style="background-color:azure;">热度</view>
+  <view class="hotlist_hot" style="background-color:azure;width:42rpx">选</view>
+  <view class="hotlist_hot" style="background-color:azure;width:42rpx">喜</view>
+</view>
